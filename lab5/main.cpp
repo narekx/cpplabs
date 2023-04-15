@@ -1,32 +1,81 @@
 #include <iostream>
-#include "Stack.h"
 #include <cmath>
-#include <ctime>
+//#include "Time.h"
+#include "TimeS.h"
+#include "Helpers.h"
 using namespace std;
 
-#define N 10
-
-int getRandomNumber(bool isAbs = false) {
-    double number = rand() % 20 - 10;
-    return isAbs ? abs(number) : number;
-}
+#define N 7
 
 void test1() {
-    Stack <int> s(10);
-    s.push(5);
-    s.push(6);
-    s.push(2);
-    s.push(4);
-    cout << *s.pop() << endl;
-    cout << *s.pop() << endl;
-    if (!s.empty()) {
-        s.print();
+    cout << "Start test1" << endl;
+
+    Time t(14, 1);
+    cout << t << endl;
+    t.print12();
+    cout << ++t << endl;
+    cout << t++ << endl;
+    t.print();
+//    t.print();
+
+    cout << "End test1" << endl;
+}
+
+bool compareForTest2(Time &t1, Time &t2) {
+    Time halfDay(12, 0);
+    return abs(t1.minuteNumber() - halfDay.minuteNumber()) < abs(t2.minuteNumber() - halfDay.minuteNumber());
+}
+
+void test2() {
+    cout << "Start test2" << endl;
+    Time *arr = new Time[N];
+    for (int i = 0; i < N; i++) {
+        arr[i] = *new Time(random(0, 23), random(0, 59));
+        cout << arr[i] << " ";
     }
+    cout << endl;
+
+    quickSort<Time>(arr, 0, N, compareForTest2);
+
+    cout << "Two closest times to 12:00" << endl;
+    for (int i = 0; i < 2; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    delete []arr;
+    cout << "End test2" << endl;
+}
+
+bool compareForTest3(TimeS &t1, TimeS &t2) {
+    return t1 > t2;
+}
+
+void test3() {
+    cout << "Start test3" << endl;
+    TimeS *arr = new TimeS[N];
+    for (int i = 0; i < N; i++) {
+        arr[i] = *new TimeS(random(0, 23), random(0, 59));
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    quickSort<TimeS>(arr, 0, N, compareForTest3);
+
+    cout << "Two longest times" << endl;
+    for (int i = 0; i < 2; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    delete []arr;
+    cout << "End test3" << endl;
 }
 
 int main() {
-
     test1();
+    test2();
+    test3();
 
     return 0;
 }
