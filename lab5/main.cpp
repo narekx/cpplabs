@@ -23,7 +23,7 @@ void test1() {
 
 bool compareForTest2(Time &t1, Time &t2) {
     Time halfDay(12, 0);
-    return abs(t1.minuteNumber() - halfDay.minuteNumber()) < abs(t2.minuteNumber() - halfDay.minuteNumber());
+    return abs((int)(t1.minuteNumber() - halfDay.minuteNumber())) < abs((int)(t2.minuteNumber() - halfDay.minuteNumber()));
 }
 
 void test2() {

@@ -134,7 +134,7 @@ public:
         cout << this->toPrint12() << endl;
     }
 
-    int minuteNumber() const {
+    unsigned int minuteNumber() const {
         return this->hour * 60 + this->minute;
     }
 };
