@@ -1,4 +1,4 @@
-#include <iostream>
+//#include <iostream>
 #include <cmath>
 //#include "Time.h"
 #include "TimeS.h"
@@ -10,12 +10,17 @@ using namespace std;
 void test1() {
     cout << "Start test1" << endl;
 
-    Time t(14, 1);
-    cout << t << endl;
-    t.print12();
-    cout << ++t << endl;
-    cout << t++ << endl;
-    t.print();
+    TimeS t(14, 1, 0);
+    cin >> t;
+    cout << t;
+//    cout << t << endl;
+//    t.print12();
+//    cout << ++t << endl;
+//    cout << t++ << endl;
+//    t.print();
+//
+//    TimeS ts(14, 14, 14);
+//    cout << ts << endl;
 //    t.print();
 
     cout << "End test1" << endl;
@@ -74,8 +79,8 @@ void test3() {
 
 int main() {
     test1();
-    test2();
-    test3();
+//    test2();
+//    test3();
 
     return 0;
 }

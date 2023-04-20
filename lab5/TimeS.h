@@ -1,7 +1,7 @@
-#include <iostream>
-#include <string>
+//#include <iostream>
+//#include <string>
 #include "Time.h"
-using namespace std;
+//using namespace std;
 
 class TimeS : Time {
 private:
@@ -25,15 +25,13 @@ private:
     }
 
     string toString(const unsigned int hour, const unsigned int minute, unsigned int second) const {
-        return this->getPaddedString(hour)
-        + ":"
-        + this->getPaddedString(minute)
+        return Time::toString(hour, minute)
         + ":"
         + this->getPaddedString(second);
     }
 
     string toPrint() const {
-        return this->toString(this->hour, this->minute, this->minute);
+        return this->toString(this->hour, this->minute, this->second);
     }
 
     string toPrint12() const {
@@ -45,7 +43,7 @@ public:
     }
 
     bool operator ==(const TimeS &t) const {
-        return this->hour == t.hour && this->minute == t.minute && this->second == t.second;
+        return Time::operator==(t) && this->second == t.second;
     }
 
     bool operator !=(const TimeS &t) const {
@@ -54,31 +52,13 @@ public:
 
     bool operator >(const TimeS &t) const {
         return this->secondNumber() > t.secondNumber();
-//        if (this->hour < t.hour) {
-//            return false;
-//        }
-//
-//        if (this->hour > t.hour) {
-//            return true;
-//        }
-//
-//        if (this->minute < t.minute) {
-//            return false;
-//        }
-//
-//        if (this->minute > t.minute) {
-//            return true;
-//        }
-//
-//        return  this->second == t.second;
     }
 
     bool operator <(const TimeS &t) const {
         return this->secondNumber() < t.secondNumber();
-//        return *this != t && !(*this > t);
     }
 
-    TimeS operator ++() {
+    TimeS& operator ++() {
         this->addSecond();
         return *this;
     }
@@ -89,12 +69,31 @@ public:
         return temp;
     }
 
+    friend istream &operator >>(istream &in, TimeS &t) {
+        unsigned int newHour;
+        unsigned int newMinute;
+        unsigned int newSecond;
+        cout << "Enter hour: ";
+        in >> newHour;
+        t.setHour(newHour);
+
+        cout << "Enter minute: ";
+        in >> newMinute;
+        t.setMinute(newMinute);
+
+        cout << "Enter second: ";
+        in >> newSecond;
+        t.setSecond(newSecond);
+
+        return in;
+    }
+
     friend ostream &operator <<(ostream &os, const TimeS &t) {
         os << t.toPrint();
         return os;
     }
 
     unsigned int secondNumber() const {
-        return this->hour * 3600 + this->minute * 60 + this->second;
+        return Time::minuteNumber() * 60 + this->second;
     }
 };

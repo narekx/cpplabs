@@ -94,31 +94,35 @@ public:
 
     bool operator >(const Time &t) const {
         return this->minuteNumber() > t.minuteNumber();
-//        if (this->hour < t.hour) {
-//            return false;
-//        }
-//
-//        if (this->hour > t.hour) {
-//            return true;
-//        }
-//
-//        return this->minute > t.minute;
     }
 
     bool operator <(const Time &t) const {
         return this->minuteNumber() < t.minuteNumber();
-//        return *this != t && !(*this > t);
     }
 
-    Time operator ++() {
+    Time& operator ++() {
         this->addMinute();
         return *this;
     }
 
     Time operator ++(int) {
         Time temp = *this;
-        this->addMinute();
+        ++(*this);
         return temp;
+    }
+
+    friend istream &operator >>(istream &in, Time &t) {
+        unsigned int newHour;
+        unsigned int newMinute;
+        cout << "Enter hour: ";
+        in >> newHour;
+        t.setHour(newHour);
+
+        cout << "Enter minute: ";
+        in >> newMinute;
+        t.setMinute(newMinute);
+
+        return in;
     }
 
     friend ostream &operator <<(ostream &os, const Time &t) {
