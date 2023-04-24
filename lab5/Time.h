@@ -56,14 +56,6 @@ protected:
     string toString(const unsigned int hour, const unsigned int minute) const {
         return this->getPaddedString(hour) + ":" + this->getPaddedString(minute);
     }
-
-    string toPrint() const {
-        return this->toString(this->hour, this->minute);
-    }
-
-    string toPrint12() const {
-        return this->toString(this->getHourFor12(), this->minute) + "[" + this->getSuffix() + "]";
-    }
 public:
     Time(unsigned int hour = 0, unsigned int minute = 0) {
         this->setHour(hour);
@@ -140,5 +132,13 @@ public:
 
     unsigned int minuteNumber() const {
         return this->hour * 60 + this->minute;
+    }
+
+    string toPrint() const {
+        return this->toString(this->hour, this->minute);
+    }
+
+    string toPrint12() const {
+        return this->toString(this->getHourFor12(), this->minute) + "[" + this->getSuffix() + "]";
     }
 };

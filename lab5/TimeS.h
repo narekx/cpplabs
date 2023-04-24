@@ -3,7 +3,7 @@
 #include "Time.h"
 //using namespace std;
 
-class TimeS : Time {
+class TimeS : public Time {
 private:
     unsigned int second;
 
@@ -28,14 +28,6 @@ private:
         return Time::toString(hour, minute)
         + ":"
         + this->getPaddedString(second);
-    }
-
-    string toPrint() const {
-        return this->toString(this->hour, this->minute, this->second);
-    }
-
-    string toPrint12() const {
-        return this->toString(this->getHourFor12(), this->minute, this->second) + "[" + this->getSuffix() + "]";
     }
 public:
     TimeS(unsigned int hour = 0, unsigned int minute = 0, unsigned int second = 0) : Time(hour, minute) {
@@ -70,17 +62,9 @@ public:
     }
 
     friend istream &operator >>(istream &in, TimeS &t) {
-        unsigned int newHour;
-        unsigned int newMinute;
+        in >> static_cast<Time&>(t);
+
         unsigned int newSecond;
-        cout << "Enter hour: ";
-        in >> newHour;
-        t.setHour(newHour);
-
-        cout << "Enter minute: ";
-        in >> newMinute;
-        t.setMinute(newMinute);
-
         cout << "Enter second: ";
         in >> newSecond;
         t.setSecond(newSecond);
@@ -95,5 +79,13 @@ public:
 
     unsigned int secondNumber() const {
         return Time::minuteNumber() * 60 + this->second;
+    }
+
+    string toPrint() const {
+        return this->toString(this->hour, this->minute, this->second);
+    }
+
+    string toPrint12() const {
+        return this->toString(this->getHourFor12(), this->minute, this->second) + "[" + this->getSuffix() + "]";
     }
 };
