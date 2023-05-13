@@ -50,12 +50,12 @@ void test2() {
 
     quickSort<Driver>(arr, 0, N - 1, compareForTest2);
 
-//    cout << "====" << endl;
-//    for (int i = 0; i < N; i++) {
-//        cout << arr[i].getDriverExperience() << ", " << arr[i].getAge() << endl;
-//    }
+    cout << "====" << endl;
     cout << "Youngest driver with longest driver experience" << endl;
-    cout << arr[0];
+    for (int i = 0; i < N; i++) {
+        cout << arr[i].getDriverExperience() << ", " << arr[i].getAge() << endl;
+    }
+//    cout << arr[0];
     cout << endl;
 
     delete []arr;
@@ -63,8 +63,8 @@ void test2() {
 }
 
 int main() {
-//    test1();
-    test2();
+    test1();
+//    test2();
 
     return 0;
 }
