@@ -40,6 +40,7 @@ void test2() {
 
     for (int i = 0; i < N; i++) {
         cout << arr[i]->volume() << " ";
+        delete arr[i];
     }
 
     cout << endl;
@@ -74,15 +75,21 @@ void test3() {
     int t = findInArray(arr, 0, N, compareForTest3);
     arr[t]->print();
 
+
+
+    for (int i = 0; i < N; i++) {
+        delete arr[i];
+    }
+
     cout << endl;
 
     cout << "End test3" << endl;
 }
 
 int main() {
-    test1();
+//    test1();
     test2();
-    test3();
+//    test3();
 
     return 0;
 }
